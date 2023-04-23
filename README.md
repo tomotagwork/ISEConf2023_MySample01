@@ -113,7 +113,7 @@ prop.txtを編集して、コンパイルしたいプログラム名を@ProgName
 @CompLibrary@=IGYV6R4.SIGYCOMP
 @LinkLibrary@=CEE.SCEELKED
 @ProgName@=TMAIN01
-
+ 
 ```
 
 補足:
@@ -141,7 +141,7 @@ prop.txtを編集して、実行したいプログラム名を@ProgName@に指�
 @CompLibrary@=IGYV6R4.SIGYCOMP
 @LinkLibrary@=CEE.SCEELKED
 @ProgName@=TMAIN01
-
+ 
 ```
 
 補足:
