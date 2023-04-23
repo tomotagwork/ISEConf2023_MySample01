@@ -1,0 +1,1244 @@
+PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003                 Date 04/22/2023  Time 08:41:16   Page     1
+
+Invocation parameters:
+ LIST,MAP,LIB
+
+        IGYOS4090-I   The "LIB" option specification is no longer required.  COBOL library processing is always in effect.
+
+
+Options in effect:
+ NOADATA
+   ADV
+   AFP(NOVOLATILE)
+   QUOTE
+   ARCH(10)
+   ARITH(COMPAT)
+ NOAWO
+ NOBLOCK0
+   BUFSIZE(4096)
+ NOCICS
+   CODEPAGE(1140)
+ NOCOMPILE(S)
+   CONDCOMP(NOSKIPSRC)
+ NOCOPYLOC
+ NOCOPYRIGHT
+ NOCURRENCY
+   DATA(31)
+   DBCS
+ NODECK
+ NODEFINE
+ NODIAGTRUNC
+   DISPSIGN(COMPAT)
+ NODLL
+ NODUMP
+ NODYNAM
+ NOEXIT
+ NOEXPORTALL
+ NOFASTSRT
+   FLAG(I,I)
+ NOFLAGSTD
+   HGPR(PRESERVE)
+ NOINITCHECK
+ NOINITIAL
+   INLINE
+   INTDATE(ANSI)
+ NOINVDATA
+ NOJAVAIOP
+   LANGUAGE(EN)
+   LINECOUNT(60)
+   LIST
+   LP(32)
+   MAP(HEX)
+   MAXPCF(100000)
+ NOMDECK
+ NONAME
+   NSYMBOL(NATIONAL)
+ NONUMBER
+ NONUMCHECK
+   NUMPROC(NOPFD)
+   OBJECT
+ NOOFFSETPP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003                 Date 04/22/2023  Time 08:41:16   Page     2
+
+   OPTIMIZE(0)
+   OUTDD(SYSOUT)
+ NOPARMCHECK
+   PGMNAME(COMPAT)
+   QUALIFY(COMPAT)
+   RENT
+   RMODE(AUTO)
+ NORULES
+ NOSERVICE
+   SEQUENCE
+   SMARTBIN
+   SOURCE(DEC)
+   SPACE(1)
+ NOSQL
+   SQLCCSID
+ NOSQLIMS
+ NOSSRANGE
+ NOSTGOPT
+   SUPPRESS
+ NOTERM
+ NOTEST(NODWARF,NOSOURCE,NOSEPARATE)
+ NOTHREAD
+   TRUNC(STD)
+   TUNE(10)
+ NOVBREF
+   VLR(STANDARD)
+   VSAMOPENFS(COMPAT)
+ NOWORD
+   XMLPARSE(XMLSS)
+   XREF(FULL)
+   ZWBPP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page     3
+  LineID  PL SL  ----+-*A-1-B--+----2----+----3----+----4----+----5----+----6----+----7-|--+----8 Map and Cross Reference
+
+  000001               ******************************************************************
+  000002               * Licensed materials - Property of IBM                           *
+  000003               * 5724-T07(C) Copyright IBM Corp. 2020                           *
+  000004               * All rights reserved                                            *
+  000005               * US Government users restricted rights  -  Use, duplication or  *
+  000006               * disclosure restricted by GSA ADP schedule contract with IBM    *
+  000007               * Corp.                                                          *
+  000008               *                                                                *
+  000009               * IBM Developer for z/OS (IDz)                                   *
+  000010               * IBM z/OS Automated Unit Testing Framework (zUnit)              *
+  000011               * Enterprise COBOL zUnit Test Case Sample CALL02.cbl             *
+  000012               *                                                                *
+  000013               * @since   15.0.0                                                *
+  000014               * @version 15.0.0                                                *
+  000015               ******************************************************************
+  000016                IDENTIFICATION DIVISION.
+  000017                PROGRAM-ID. TMAIN01.
+  000018                ENVIRONMENT DIVISION.
+  000019                DATA DIVISION.
+  000020                WORKING-STORAGE SECTION.
+  000021                01 PARM02.                                                                          000000000 0CL10
+  000022                    COPY CPPARM02.
+  000023C                 03 ITEM02-01      PIC X(5).                                                       000000000 5C
+  000024C                 03 ITEM02-02      PIC X(5).                                                       000000005 5C
+  000025                01 PARM03.                                                                          000000000 0CL10
+  000026                    COPY CPPARM03.
+  000027C                 03 ITEM03-01      PIC X(5).                                                       000000000 5C
+  000028C                 03 ITEM03-02      PIC X(5).                                                       000000005 5C
+  000029
+  000030                01 PARM2.                                                                           000000000 0CL27
+  000031                  05 SNUM10-02    PIC S9(08)V9(02) VALUE 0.                                         000000000 10C
+  000032                  05 SLNUM10      PIC S9(10) SIGN LEADING VALUE 0.                                  00000000A 10C
+  000033                  05 SBIN09       PIC S9(09) BINARY VALUE 0.                                        000000014 4C
+  000034                  05 SPACK04      PIC S9(04) COMP-3 VALUE 0.                                        000000018 3P
+  000035                01 PARM4          PIC X(4) VALUE "AAAA".                                            000000000 4C
+  000036                01 PARM5.                                                                           000000000 0CL4
+  000037                  03 PARM51       PIC 9(2) VALUE 4.                                                 000000000 2C
+  000038                  03 PARM52       PIC X(2) .                                                        000000002 2C
+  000039
+  000040                01 PGMSUB02        PIC X(8) VALUE "TSUB02".                                         000000000 8C
+  000041                01 PGMSUB03        PIC X(8) VALUE "TSUB03".                                         000000000 8C
+  000042
+  000043                LINKAGE SECTION.
+  000044                01 PARM01.                                                                BLL=00001,000000000 0CL12
+  000045                    COPY CPPARM01.
+  000046C                 03 PARM-LENGTH    PIC S9(4) COMP.                                       BLL=00001,000000000 2C
+  000047C                 03 ITEM01-01      PIC X(5).                                             BLL=00001,000000002 5C
+  000048C                 03 ITEM01-02      PIC X(5).                                             BLL=00001,000000007 5C
+  000049
+  000050                PROCEDURE DIVISION USING PARM01.                                          44
+  000051
+  000052                    DISPLAY '*** BEGIN TMAIN01 TEST'.
+  000053
+  000054                    DISPLAY "ITEM01-01:" ITEM01-01.                                       47
+  000055                    DISPLAY "ITEM01-02:" ITEM01-02.                                       48
+  000056
+  000057                    EVALUATE ITEM01-01                                                    47PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page     4
+  LineID  PL SL  ----+-*A-1-B--+----2----+----3----+----4----+----5----+----6----+----7-|--+----8 Map and Cross Reference
+
+  000058                         WHEN 'AAAAA'
+  000059      1                      DISPLAY 'ROUTE A'
+  000060                         WHEN 'BBBBB'
+  000061      1                      DISPLAY 'ROUTE B'
+  000062                         WHEN 'CCCCC'
+  000063      1                      DISPLAY 'ROUTE C'
+  000064                         WHEN OTHER
+  000065      1                      DISPLAY 'ROUTE OTHER'
+  000066                    END-EVALUATE.
+  000067
+  000068               * CALL SUB02
+  000069
+  000070                    MOVE PARM01 TO PARM02.                                                44 21
+  000071                    CALL PGMSUB02 USING PARM02.                                           40 21
+  000072
+  000073                    DISPLAY "After calling PGMSUB02".
+  000074                    DISPLAY "  ITEM02-01:" ITEM02-01.                                     23
+  000075                    DISPLAY "  ITEM02-02:" ITEM02-02.                                     24
+  000076
+  000077               * CALL SUB03
+  000078
+  000079                    MOVE PARM02 TO PARM03.                                                21 25
+  000080                    CALL PGMSUB03 USING PARM03.                                           41 25
+  000081
+  000082                    DISPLAY "After calling PGMSUB03".
+  000083                    DISPLAY "  ITEM03-01:" ITEM03-01.                                     27
+  000084                    DISPLAY "  ITEM03-02:" ITEM03-02.                                     28
+  000085
+  000086                    DISPLAY '** END TMAIN01'.
+  000087
+  000088               *****************************************************
+  000089                    GOBACK.PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page     5
+
+An "M" preceding a data-name reference indicates that the data-name is modified by this reference.
+
+ Defined   Cross-reference of data names   References
+
+      47   ITEM01-01. . . . . . . . . . .  54 57
+      48   ITEM01-02. . . . . . . . . . .  55
+      23   ITEM02-01. . . . . . . . . . .  74
+      24   ITEM02-02. . . . . . . . . . .  75
+      27   ITEM03-01. . . . . . . . . . .  83
+      28   ITEM03-02. . . . . . . . . . .  84
+      46   PARM-LENGTH
+      44   PARM01 . . . . . . . . . . . .  50 70
+      21   PARM02 . . . . . . . . . . . .  M70 71 79
+      25   PARM03 . . . . . . . . . . . .  M79 80
+      30   PARM2
+      35   PARM4
+      36   PARM5
+      37   PARM51
+      38   PARM52
+      40   PGMSUB02 . . . . . . . . . . .  71
+      41   PGMSUB03 . . . . . . . . . . .  80
+      33   SBIN09
+      32   SLNUM10
+      31   SNUM10-02
+      34   SPACK04PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page     6
+
+ Defined   Cross-reference of programs     References
+
+      17   TMAIN01PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page     7
+
+
+         COPY/BASIS cross-reference of text-names, library names and dataset information
+
+ Text-name Library   File name                                    Concat   ISPF statistics
+ (Member)  (DDNAME)  (Dataset name)                               Level    Created         Changed
+
+ CPPARM01  SYSLIB    TAGUCHI.TEST01.COBOL.COPYLIB                   0
+ CPPARM02  SYSLIB    TAGUCHI.TEST01.COBOL.COPYLIB                   0
+ CPPARM03  SYSLIB    TAGUCHI.TEST01.COBOL.COPYLIB                   0
+PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page     8
+
+Data Division Map
+
+Data Definition Attribute codes (rightmost column) have the following meanings:
+    BL= Fixed byte-length UTF-8       FB= Fixed-length blocked file          S = Spanned file
+    D = Object of OCCURS DEPENDING    G = GLOBAL                             U = Undefined format file
+    DL= Dynamic length                O = Has OCCURS clause                  V = Variable-length file
+    E = EXTERNAL                      OG= Group has own length definition    VB= Variable-length blocked file
+    F = Fixed-length file             R = REDEFINES                          X = Unallocated
+
+Source   Hierarchy and                                    Base      Displacement  Asmblr Data                      Data Def
+LineID   Data Name                                        Locator     Structure   Definition        Data Type      Attributes
+    17  PROGRAM-ID TMAIN01-----------------------------------------------------------------------------------------------------*
+    21   1  PARM02. . . . . . . . . . . . . . . . . . . .             000000000   DS 0CL10          Group
+    23     2  ITEM02-01 . . . . . . . . . . . . . . . . .             000000000   DS 5C             Display
+    24     2  ITEM02-02 . . . . . . . . . . . . . . . . .             000000005   DS 5C             Display
+    25   1  PARM03. . . . . . . . . . . . . . . . . . . .             000000000   DS 0CL10          Group
+    27     2  ITEM03-01 . . . . . . . . . . . . . . . . .             000000000   DS 5C             Display
+    28     2  ITEM03-02 . . . . . . . . . . . . . . . . .             000000005   DS 5C             Display
+    30   1  PARM2 . . . . . . . . . . . . . . . . . . . .             000000000   DS 0CL27          Group
+    31     2  SNUM10-02 . . . . . . . . . . . . . . . . .             000000000   DS 10C            Disp-Num
+    32     2  SLNUM10 . . . . . . . . . . . . . . . . . .             00000000A   DS 10C            Disp-Num
+    33     2  SBIN09. . . . . . . . . . . . . . . . . . .             000000014   DS 4C             Binary
+    34     2  SPACK04 . . . . . . . . . . . . . . . . . .             000000018   DS 3P             Packed-Dec
+    35   1  PARM4 . . . . . . . . . . . . . . . . . . . .             000000000   DS 4C             Display
+    36   1  PARM5 . . . . . . . . . . . . . . . . . . . .             000000000   DS 0CL4           Group
+    37     2  PARM51. . . . . . . . . . . . . . . . . . .             000000000   DS 2C             Disp-Num
+    38     2  PARM52. . . . . . . . . . . . . . . . . . .             000000002   DS 2C             Display
+    40   1  PGMSUB02. . . . . . . . . . . . . . . . . . .             000000000   DS 8C             Display
+    41   1  PGMSUB03. . . . . . . . . . . . . . . . . . .             000000000   DS 8C             Display
+    44   1  PARM01. . . . . . . . . . . . . . . . . . . . BLL=00001   000000000   DS 0CL12          Group
+    46     2  PARM-LENGTH . . . . . . . . . . . . . . . . BLL=00001   000000000   DS 2C             Binary
+    47     2  ITEM01-01 . . . . . . . . . . . . . . . . . BLL=00001   000000002   DS 5C             Display
+    48     2  ITEM01-02 . . . . . . . . . . . . . . . . . BLL=00001   000000007   DS 5C             Display
+End of Data Division MapPP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page     9
+
+ 000017:         PROGRAM-ID. TMAIN01.
+    000000                     000017            PROC    TMAIN01
+    000000  47F0 F014          000017            BC      R15,20(,R15)          #  Skip over constant area
+    000004  01C3 C5C5          000017            DC      X'01C3C5C5'           #  Eyecatcher: CEE
+    000008  0000 0198          000017            DC      X'00000198'           #  Stack Size
+    00000C  0000 0AA8          000017            DC      X'00000AA8'           #  Offset to PPA1
+    000010  47F0 F001          000017            BC      R15,1(,R15)           #  Wrong Entry Point: cause exception
+    000014                     000017  L0274:    EQU     *
+    000014  90EC D00C          000017            STM     R14,R12,12(,R13)      #  Save GPRs Used
+    000018  41A0 F024          000017            LA      R10,36(,R15)          #  Args for boot strap routine
+    00001C  98EF F034          000017            LM      R14,R15,52(,R15)      #
+    000020  47F0 F020          000017            BC      R15,32(,R15)          #  Branch to boot strap routine
+    000024                     000017  L0276:    EQU     *                     #  Boot Strap Info Block
+    000024  0000 0000          000017            DC      X'00000000'           #  address of entry label
+    000028  0000 00F8          000017            DC      X'000000F8'           #  Storage allocation size
+    00002C  0000 0C54          000017            DC      X'00000C54'           #  address of Saved Option String
+    000030  0000 0AE8          000017            DC      X'00000AE8'           #  address of entry point name
+    000034  0000 005C          000017            DC      X'0000005C'           #  A(Label L0275)
+    000038  0000 0000          000017            DC      X'00000000'           #  address of boot strap routine(IGZXBST4)
+    00003C                     000017  L0277:    EQU     *                     #  CEE Parameter Block
+    00003C  0000 0024          000017            DC      X'00000024'           #  address of infoBlockLabel
+    000040  0000 0C6C          000017            DC      X'00000C6C'           #  A(PARMCEE-CEEEPARMBlock)
+    000044  0000 0650          000017            DC      X'00000650'           #  A(sinit)
+    000048  0000 0000          000017            DC      X'00000000'           #  reserved
+    00004C                     000017  L0272:    EQU     *                     #  Handle growing stack
+    00004C  58F0 C31C          000017            L       R15,796(,R12)         #  Load CEECAAOGETS
+    000050  184E               000017            LR      R4,R14                #  Required NAB
+    000052  05EF               000017            BALR    R14,R15               #  Extend Stack
+    000054  0000 0000          000017            DC      X'00000000'           #  Argument list size = 0
+    000058  A7F4 0009          000017            J       L0273                 #  Branch back
+    00005C                     000017  @MAINENT  DS      0H                    #  PRIMARY ENTRY POINT ADDRESS
+    00005C                     000017  L0275:    EQU     *                     #  User Code Entry Point
+    00005C  18EF               000017            LR      R14,R15               #  Load NAB
+    00005E  4100 E198          000017            LA      R0,408(,R14)          #  New NAB Address
+    000062  5500 C314          000017            CL      R0,788(,R12)          #  Exceed current storage segment?
+    000066  A724 FFF3          000017            JH      L0272                 #  Yes: branch to recovery code
+    00006A                     000017  L0273:    EQU     *                     #  Stack now has sufficient room
+    00006A  5000 E04C          000017            ST      R0,76(,R14)           #  Update NAB
+    00006E  C001 0011 0301     000017            LGFI    R0,X'00110301'        #  load COBOL Language Word
+    000074  5000 E000          000017            ST      R0,0(,R14)            #  Save Language Word
+    000078  50D0 E004          000017            ST      R13,4(,R14)           #  Save Back Chain
+    00007C  18DE               000017            LR      R13,R14               #  Set new DSA
+    00007E  4100 D120          000017            LA      R0,288(,R13)          #  Address of COBDSACB
+    000082  5000 D074          000017            ST      R0,116(,R13)          #  Saved in member slot1
+    000086  E54C D070 0000     000017            MVHI    112(,R13),X'0000'     #  zero member slot0
+    00008C  5060 D060          000017            ST      R6,96(,R13)           #  set member slot3
+    000090  5070 D068          000017            ST      R7,104(,R13)          #  set member slot2
+    000094  EB1F D090 0026     000017            STMH    R1,R15,144(,R13)      #
+    00009A                     000017  L0279:    EQU     *
+    00009A  5010 D080          000017            ST      R1,128(,R13)          #
+    00009E  50C0 D084          000017            ST      R12,132(,R13)         #
+    0000A2  C030 0000 036B     000017            LARL    R3,$CONSTANT_AREA
+    0000A8  5800 C1F4          000017            L       R0,500(,R12)          #
+    0000AC  5000 D0E8          000017            ST      R0,232(,R13)          #
+    0000B0  5820 C1F4          000017            L       R2,500(,R12)          #
+    0000B4  5840 3010          000017            L       R4,16(,R3)            #
+    0000B8  4184 2000          000017            LA      R8,0(R4,R2)           #
+    0000BC  5080 D0E4          000017            ST      R8,228(,R13)          #PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page    10
+
+    0000C0  5800 1000          000017            L       R0,0(,R1)             #
+    0000C4  A506 7FFF          000017            NILH    R0,0x7fff
+    0000C8  5000 8000          000017            ST      R0,0(,R8)             #
+    0000CC  4120 D120          000017            LA      R2,288(,R13)          #  COBDSACB
+    0000D0  D75F 2000 2000     000017            XC      0(96,R2),0(R2)        #
+    0000D6  E54C D120 0009     000017            MVHI    288(,R13),X'0009'     #
+    0000DC  4100 8010          000017            LA      R0,16(,R8)            #
+    0000E0  5000 D144          000017            ST      R0,324(,R13)          #
+    0000E4  9181 8060          000017            TM      96(,R8),X'81'         #  IPCB_Status
+    0000E8  A714 0018          000017            JO      L0003
+    0000EC  4100 8010          000017            LA      R0,16(,R8)            #  GPCB
+    0000F0  5000 D0F8          000017            ST      R0,248(,R13)          #
+    0000F4  4100 D120          000017            LA      R0,288(,R13)          #  COBDSACB
+    0000F8  5000 D0FC          000017            ST      R0,252(,R13)          #
+    0000FC  4110 D0F8          000017            LA      R1,248(,R13)          #  _ArgumentList
+    000100  58F0 3018          000017            L       R15,24(,R3)           #
+    000104  58C0 D084          000017            L       R12,132(,R13)         #
+    000108  0DEF               000017            BASR    R14,R15               #  Call IGZXPRS
+    00010A  50F0 8084          000017            ST      R15,132(,R8)          #
+    00010E  5820 8060          000017            L       R2,96(,R8)            #  IPCB_Status
+    000112  C02B 8000 0000     000017            NILF    R2,X'80000000'
+    000118                     000017  L0003:    EQU     *
+    000118  EB01 805C 006A     000017            ASI     92(,R8),X'01'         #
+    00011E  E55D 805C 0001     000017            CLFHSI  92(,R8),X'0001'       #  IPCB_NumEnts
+    000124  A784 000C          000017            JE      L0004
+    000128  D223 D0F8 3044     000017            MVC     248(36,R13),68(R3)    #
+    00012E  4110 D0F8          000017            LA      R1,248(,R13)          #  _ArgumentList
+    000132  58F0 301C          000017            L       R15,28(,R3)           #
+    000136  58C0 D084          000017            L       R12,132(,R13)         #
+    00013A  0DEF               000017            BASR    R14,R15               #  Call IGZXCMSG
+    00013C                     000017  L0004:    EQU     *
+    00013C  5890 8084          000017            L       R9,132(,R8)           #
+    000140  5090 D0E0          000017            ST      R9,224(,R13)          #
+    000144  9180 8060          000017            TM      96(,R8),X'80'         #  IPCB_Status
+    000148  A714 0018          000017            JO      L0005
+    00014C  A718 0000          000017            LHI     R1,0x0
+    000150  58F0 3020          000017            L       R15,32(,R3)           #
+    000154  58C0 D084          000017            L       R12,132(,R13)         #
+    000158  185D               000017            LR      R5,R13
+    00015A  0DEF               000017            BASR    R14,R15               #  Call #SRVal000000001
+    00015C  A718 0000          000017            LHI     R1,0x0
+    000160  58F0 3024          000017            L       R15,36(,R3)           #
+    000164  58C0 D084          000017            L       R12,132(,R13)         #
+    000168  185D               000017            LR      R5,R13
+    00016A  0DEF               000017            BASR    R14,R15               #  Call #WSVal000000001
+    00016C  5820 8060          000017            L       R2,96(,R8)            #  IPCB_Status
+    000170  A52A 8100          000017            OILH    R2,0x8100
+    000174  5020 8060          000017            ST      R2,96(,R8)            #
+    000178                     000017  L0005:    EQU     *
+    000178  A728 0000          000017            LHI     R2,0x0
+    00017C                     000052  USER-ENTRY: EQU     *
+ 000052:             DISPLAY '*** BEGIN TMAIN01 TEST'.
+    00017C  D217 D0F8 3080     000052            MVC     248(24,R13),128(R3)   #
+    000182  4110 D0F8          000052            LA      R1,248(,R13)          #  _ArgumentList
+    000186  58F0 3028          000052            L       R15,40(,R3)           #
+    00018A  58C0 D084          000052            L       R12,132(,R13)         #
+    00018E  0DEF               000052            BASR    R14,R15               #  Call IGZXDSP
+ 000054:             DISPLAY "ITEM01-01:" ITEM01-01.PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page    11
+
+    000190  D217 D0F8 30A4     000054            MVC     248(24,R13),164(R3)   #
+    000196  5820 8000          000054            L       R2,0(,R8)             #  BLL_1
+    00019A  4120 2002          000054            LA      R2,2(,R2)             #  ITEM01-01
+    00019E  5020 D110          000054            ST      R2,272(,R13)          #
+    0001A2  D20B D114 3294     000054            MVC     276(12,R13),660(R3)   #                           +660
+    0001A8  4110 D0F8          000054            LA      R1,248(,R13)          #  _ArgumentList
+    0001AC  58F0 3028          000054            L       R15,40(,R3)           #
+    0001B0  58C0 D084          000054            L       R12,132(,R13)         #
+    0001B4  0DEF               000054            BASR    R14,R15               #  Call IGZXDSP
+ 000055:             DISPLAY "ITEM01-02:" ITEM01-02.
+    0001B6  D217 D0F8 30C8     000055            MVC     248(24,R13),200(R3)   #
+    0001BC  5820 8000          000055            L       R2,0(,R8)             #  BLL_1
+    0001C0  4120 2007          000055            LA      R2,7(,R2)             #  ITEM01-02
+    0001C4  5020 D110          000055            ST      R2,272(,R13)          #
+    0001C8  D20B D114 3294     000055            MVC     276(12,R13),660(R3)   #                           +660
+    0001CE  4110 D0F8          000055            LA      R1,248(,R13)          #  _ArgumentList
+    0001D2  58F0 3028          000055            L       R15,40(,R3)           #
+    0001D6  58C0 D084          000055            L       R12,132(,R13)         #
+    0001DA  0DEF               000055            BASR    R14,R15               #  Call IGZXDSP
+ 000058:                  WHEN 'AAAAA'
+    0001DC  5820 8000          000058            L       R2,0(,R8)             #  BLL_1
+    0001E0  D504 2002 32A8     000058            CLC     2(5,R2),680(R3)       #  ITEM01-01
+    0001E6  A774 000E          000058            JNE     L0006
+ 000059:                      DISPLAY 'ROUTE A'
+    0001EA  D217 D0F8 30E8     000059            MVC     248(24,R13),232(R3)   #
+    0001F0  4110 D0F8          000059            LA      R1,248(,R13)          #  _ArgumentList
+    0001F4  58F0 3028          000059            L       R15,40(,R3)           #
+    0001F8  58C0 D084          000059            L       R12,132(,R13)         #
+    0001FC  0DEF               000059            BASR    R14,R15               #  Call IGZXDSP
+    0001FE  A7F4 0032          000059            J       L0007
+    000202                     000060  L0006:    EQU     *
+ 000060:                  WHEN 'BBBBB'
+    000202  5820 8000          000060            L       R2,0(,R8)             #  BLL_1
+    000206  D504 2002 32AD     000060            CLC     2(5,R2),685(R3)       #  ITEM01-01
+    00020C  A774 000E          000060            JNE     L0008
+ 000061:                      DISPLAY 'ROUTE B'
+    000210  D217 D0F8 3108     000061            MVC     248(24,R13),264(R3)   #
+    000216  4110 D0F8          000061            LA      R1,248(,R13)          #  _ArgumentList
+    00021A  58F0 3028          000061            L       R15,40(,R3)           #
+    00021E  58C0 D084          000061            L       R12,132(,R13)         #
+    000222  0DEF               000061            BASR    R14,R15               #  Call IGZXDSP
+    000224  A7F4 001F          000061            J       L0007
+    000228                     000062  L0008:    EQU     *
+ 000062:                  WHEN 'CCCCC'
+    000228  5820 8000          000062            L       R2,0(,R8)             #  BLL_1
+    00022C  D504 2002 32B2     000062            CLC     2(5,R2),690(R3)       #  ITEM01-01
+    000232  A774 000E          000062            JNE     L0009
+ 000063:                      DISPLAY 'ROUTE C'
+    000236  D217 D0F8 3128     000063            MVC     248(24,R13),296(R3)   #
+    00023C  4110 D0F8          000063            LA      R1,248(,R13)          #  _ArgumentList
+    000240  58F0 3028          000063            L       R15,40(,R3)           #
+    000244  58C0 D084          000063            L       R12,132(,R13)         #
+    000248  0DEF               000063            BASR    R14,R15               #  Call IGZXDSP
+    00024A  A7F4 000C          000063            J       L0007
+    00024E                     000065  L0009:    EQU     *
+ 000065:                      DISPLAY 'ROUTE OTHER'
+    00024E  D217 D0F8 314C     000065            MVC     248(24,R13),332(R3)   #
+    000254  4110 D0F8          000065            LA      R1,248(,R13)          #  _ArgumentListPP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page    12
+
+    000258  58F0 3028          000065            L       R15,40(,R3)           #
+    00025C  58C0 D084          000065            L       R12,132(,R13)         #
+    000260  0DEF               000065            BASR    R14,R15               #  Call IGZXDSP
+    000262                     000070  L0007:    EQU     *
+ 000070:             MOVE PARM01 TO PARM02.
+    000262  5820 8000          000070            L       R2,0(,R8)             #  PARM02
+    000266  D209 9098 2000     000070            MVC     152(10,R9),0(R2)      #  PARM01                  PARM02
+ 000071:             CALL PGMSUB02 USING PARM02.
+    00026C  4120 8088          000071            LA      R2,136(,R8)           #
+    000270  5020 D14C          000071            ST      R2,332(,R13)          #
+    000274  E54C D170 0001     000071            MVHI    368(,R13),X'0001'     #
+    00027A  4120 90E8          000071            LA      R2,232(,R9)           #
+    00027E  5020 D12C          000071            ST      R2,300(,R13)          #
+    000282  E54C D130 0008     000071            MVHI    304(,R13),X'0008'     #  DSATPgNmL
+    000288  E54C D134 0009     000071            MVHI    308(,R13),X'0009'     #  DSATPgNmL
+    00028E  4120 9098          000071            LA      R2,152(,R9)           #
+    000292  A52A 8000          000071            OILH    R2,0x8000
+    000296  D704 D174 D174     000071            XC      372(5,R13),372(R13)   #
+    00029C  5020 D0F8          000071            ST      R2,248(,R13)          #
+    0002A0  58F0 3014          000071            L       R15,20(,R3)           #
+    0002A4  4110 D0F8          000071            LA      R1,248(,R13)          #  _ArgumentList
+    0002A8  58C0 D084          000071            L       R12,132(,R13)         #
+    0002AC  0DEF               000071            BASR    R14,R15
+    0002AE  40F0 9008          000071            STH     R15,8(,R9)            #  RETURN-CODE
+ 000073:             DISPLAY "After calling PGMSUB02".
+    0002B2  D217 D0F8 317C     000073            MVC     248(24,R13),380(R3)   #
+    0002B8  4110 D0F8          000073            LA      R1,248(,R13)          #  _ArgumentList
+    0002BC  58F0 3028          000073            L       R15,40(,R3)           #
+    0002C0  58C0 D084          000073            L       R12,132(,R13)         #
+    0002C4  0DEF               000073            BASR    R14,R15               #  Call IGZXDSP
+ 000074:             DISPLAY "  ITEM02-01:" ITEM02-01.
+    0002C6  D217 D0F8 31A0     000074            MVC     248(24,R13),416(R3)   #
+    0002CC  4120 9098          000074            LA      R2,152(,R9)           #  ITEM02-01
+    0002D0  5020 D110          000074            ST      R2,272(,R13)          #
+    0002D4  D20B D114 3294     000074            MVC     276(12,R13),660(R3)   #                           +660
+    0002DA  4110 D0F8          000074            LA      R1,248(,R13)          #  _ArgumentList
+    0002DE  58F0 3028          000074            L       R15,40(,R3)           #
+    0002E2  58C0 D084          000074            L       R12,132(,R13)         #
+    0002E6  0DEF               000074            BASR    R14,R15               #  Call IGZXDSP
+ 000075:             DISPLAY "  ITEM02-02:" ITEM02-02.
+    0002E8  D217 D0F8 31C4     000075            MVC     248(24,R13),452(R3)   #
+    0002EE  4120 909D          000075            LA      R2,157(,R9)           #  ITEM02-02
+    0002F2  5020 D110          000075            ST      R2,272(,R13)          #
+    0002F6  D20B D114 3294     000075            MVC     276(12,R13),660(R3)   #                           +660
+    0002FC  4110 D0F8          000075            LA      R1,248(,R13)          #  _ArgumentList
+    000300  58F0 3028          000075            L       R15,40(,R3)           #
+    000304  58C0 D084          000075            L       R12,132(,R13)         #
+    000308  0DEF               000075            BASR    R14,R15               #  Call IGZXDSP
+ 000079:             MOVE PARM02 TO PARM03.
+    00030A  D209 90A8 9098     000079            MVC     168(10,R9),152(R9)    #  PARM03                  PARM02
+ 000080:             CALL PGMSUB03 USING PARM03.
+    000310  4120 8090          000080            LA      R2,144(,R8)           #
+    000314  5020 D14C          000080            ST      R2,332(,R13)          #
+    000318  E54C D170 0001     000080            MVHI    368(,R13),X'0001'     #
+    00031E  4120 90F0          000080            LA      R2,240(,R9)           #
+    000322  5020 D12C          000080            ST      R2,300(,R13)          #
+    000326  E54C D130 0008     000080            MVHI    304(,R13),X'0008'     #  DSATPgNmL
+    00032C  E54C D134 0009     000080            MVHI    308(,R13),X'0009'     #  DSATPgNmLPP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page    13
+
+    000332  4120 90A8          000080            LA      R2,168(,R9)           #
+    000336  A52A 8000          000080            OILH    R2,0x8000
+    00033A  D704 D174 D174     000080            XC      372(5,R13),372(R13)   #
+    000340  5020 D0F8          000080            ST      R2,248(,R13)          #
+    000344  58F0 3014          000080            L       R15,20(,R3)           #
+    000348  4110 D0F8          000080            LA      R1,248(,R13)          #  _ArgumentList
+    00034C  58C0 D084          000080            L       R12,132(,R13)         #
+    000350  0DEF               000080            BASR    R14,R15
+    000352  40F0 9008          000080            STH     R15,8(,R9)            #  RETURN-CODE
+ 000082:             DISPLAY "After calling PGMSUB03".
+    000356  D217 D0F8 31F4     000082            MVC     248(24,R13),500(R3)   #
+    00035C  4110 D0F8          000082            LA      R1,248(,R13)          #  _ArgumentList
+    000360  58F0 3028          000082            L       R15,40(,R3)           #
+    000364  58C0 D084          000082            L       R12,132(,R13)         #
+    000368  0DEF               000082            BASR    R14,R15               #  Call IGZXDSP
+ 000083:             DISPLAY "  ITEM03-01:" ITEM03-01.
+    00036A  D217 D0F8 3218     000083            MVC     248(24,R13),536(R3)   #
+    000370  4120 90A8          000083            LA      R2,168(,R9)           #  ITEM03-01
+    000374  5020 D110          000083            ST      R2,272(,R13)          #
+    000378  D20B D114 3294     000083            MVC     276(12,R13),660(R3)   #                           +660
+    00037E  4110 D0F8          000083            LA      R1,248(,R13)          #  _ArgumentList
+    000382  58F0 3028          000083            L       R15,40(,R3)           #
+    000386  58C0 D084          000083            L       R12,132(,R13)         #
+    00038A  0DEF               000083            BASR    R14,R15               #  Call IGZXDSP
+ 000084:             DISPLAY "  ITEM03-02:" ITEM03-02.
+    00038C  D217 D0F8 323C     000084            MVC     248(24,R13),572(R3)   #
+    000392  4120 90AD          000084            LA      R2,173(,R9)           #  ITEM03-02
+    000396  5020 D110          000084            ST      R2,272(,R13)          #
+    00039A  D20B D114 3294     000084            MVC     276(12,R13),660(R3)   #                           +660
+    0003A0  4110 D0F8          000084            LA      R1,248(,R13)          #  _ArgumentList
+    0003A4  58F0 3028          000084            L       R15,40(,R3)           #
+    0003A8  58C0 D084          000084            L       R12,132(,R13)         #
+    0003AC  0DEF               000084            BASR    R14,R15               #  Call IGZXDSP
+ 000086:             DISPLAY '** END TMAIN01'.
+    0003AE  D217 D0F8 3264     000086            MVC     248(24,R13),612(R3)   #
+    0003B4  4110 D0F8          000086            LA      R1,248(,R13)          #  _ArgumentList
+    0003B8  58F0 3028          000086            L       R15,40(,R3)           #
+    0003BC  58C0 D084          000086            L       R12,132(,R13)         #
+    0003C0  0DEF               000086            BASR    R14,R15               #  Call IGZXDSP
+ 000089:             GOBACK.
+    0003C2  9181 D124          000089            TM      292(,R13),X'81'       #  DSAFlags
+    0003C6  A784 003C          000089            JE      L0010
+    0003CA  A718 0000          000089            LHI     R1,0x0
+    0003CE  58F0 3030          000089            L       R15,48(,R3)           #
+    0003D2  58C0 D084          000089            L       R12,132(,R13)         #
+    0003D6  0DEF               000089            BASR    R14,R15               #  Call IGZXRTN
+    0003D8  9180 D124          000089            TM      292(,R13),X'80'       #  DSAFlags
+    0003DC  A784 0031          000089            JE      L0010
+    0003E0  E54C D0F0 0000     000089            MVHI    240(,R13),X'0000'     #
+    0003E6  4820 9008          000089            LH      R2,8(,R9)             #  RETURN-CODE
+    0003EA  5020 D0EC          000089            ST      R2,236(,R13)          #
+    0003EE  4120 D0F0          000089            LA      R2,240(,R13)          #  TS2=9
+    0003F2  5020 D0F8          000089            ST      R2,248(,R13)          #
+    0003F6  4120 D0EC          000089            LA      R2,236(,R13)          #  TS2=10
+    0003FA  5020 D0FC          000089            ST      R2,252(,R13)          #
+    0003FE  4110 D0F8          000089            LA      R1,248(,R13)          #  _ArgumentList
+    000402  58F0 3034          000089            L       R15,52(,R3)           #
+    000406  58C0 D084          000089            L       R12,132(,R13)         #PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page    14
+
+    00040A  0DEF               000089            BASR    R14,R15               #  Call IGZXTREN
+    00040C  A7F4 0019          000089            J       L0010
+    000410  9181 D124          000089            TM      292(,R13),X'81'       #  DSAFlags
+    000414  A784 0015          000089            JE      L0010
+    000418  A718 0000          000089            LHI     R1,0x0
+    00041C  58F0 3038          000089            L       R15,56(,R3)           #
+    000420  58C0 D084          000089            L       R12,132(,R13)         #
+    000424  0DEF               000089            BASR    R14,R15               #  Call IGZXRT1
+    000426  A7F4 000C          000089            J       L0010
+    00042A  D217 D0F8 327C     000089            MVC     248(24,R13),636(R3)   #
+    000430  4110 D0F8          000089            LA      R1,248(,R13)          #  _ArgumentList
+    000434  58F0 301C          000089            L       R15,28(,R3)           #
+    000438  58C0 D084          000089            L       R12,132(,R13)         #
+    00043C  0DEF               000089            BASR    R14,R15               #  Call IGZXCMSG
+    00043E                     000089  L0010:    EQU     *
+    00043E  EBFF 805C 006A     000089            ASI     92(,R8),X'FF'         #
+    000444  D201 D0F4 9008     000089            MVC     244(2,R13),8(R9)      #                          RETURN-CODE
+    00044A  48F0 D0F4          000089            LH      R15,244(,R13)         #
+    00044E  EB1F D090 0096     000089            LMH     R1,R15,144(,R13)      #
+    000454  58D0 D004          000089            L       R13,4(,R13)           #  Caller's DSA
+    000458  58E0 D00C          000089            L       R14,12(,R13)          #  Return Address
+    00045C  980C D014          000089            LM      R0,R12,20(,R13)       #  Restore Caller's registers
+    000460  07FE               000089            BR      R14                   #  Return
+    000462  0707               000089            NOPR    R7
+    000464                     000089            RET
+
+
+
+                    ***   General purpose registers used: 1111111111101111
+                    ***   Floating point  registers used: 0000000000000000
+                    ***   Size of storage acquired: 408
+                    ***   Size of executable code: 1124
+
+
+
+    000468                     000000            PROC    #SRVal000000001
+    000468  47F0 F024          000000            BC      R15,36(,R15)          #  Skip over constant area
+    00046C  01C3 C5C5          000000            DC      X'01C3C5C5'           #  Eyecatcher: CEE
+    000470  0000 00E8          000000            DC      X'000000E8'           #  Stack Size
+    000474  0000 0690          000000            DC      X'00000690'           #  Offset to PPA1
+    000478  47F0 F001          000000            BC      R15,1(,R15)           #  Wrong Entry Point: cause exception
+    00047C                     000000  L0018:    EQU     *
+    00047C                     000000  L0016:    EQU     *                     #  Handle growing stack
+    00047C  58F0 C31C          000000            L       R15,796(,R12)         #  Load CEECAAOGETS
+    000480  184E               000000            LR      R4,R14                #  Required NAB
+    000482  05EF               000000            BALR    R14,R15               #  Extend Stack
+    000484  0000 0000          000000            DC      X'00000000'           #  Argument list size = 0
+    000488  A7F4 000C          000000            J       L0017                 #  Branch back
+    00048C  90E9 D00C          000000            STM     R14,R9,12(,R13)       #  Save GPRs Used
+    000490  58E0 D04C          000000            L       R14,76(,R13)          #  Load NAB
+    000494  4100 E0E8          000000            LA      R0,232(,R14)          #  New NAB Address
+    000498  5500 C314          000000            CL      R0,788(,R12)          #  Exceed current storage segment?
+    00049C  A724 FFF0          000000            JH      L0016                 #  Yes: branch to recovery code
+    0004A0                     000000  L0017:    EQU     *                     #  Stack now has sufficient room
+    0004A0  5000 E04C          000000            ST      R0,76(,R14)           #  Update NAB
+    0004A4  C001 0011 0301     000000            LGFI    R0,X'00110301'        #  load COBOL Language Word
+    0004AA  5000 E000          000000            ST      R0,0(,R14)            #  Save Language Word
+    0004AE  50D0 E004          000000            ST      R13,4(,R14)           #  Save Back ChainPP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page    15
+
+    0004B2  4100 5120          000000            LA      R0,288(,R5)           #  Address of COBDSACB
+    0004B6  18DE               000000            LR      R13,R14               #  Set new DSA
+    0004B8  5000 D074          000000            ST      R0,116(,R13)          #  Saved in member slot1
+    0004BC  E54C D070 0000     000000            MVHI    112(,R13),X'0000'     #  zero member slot0
+    0004C2  5060 D060          000000            ST      R6,96(,R13)           #  set member slot3
+    0004C6  5070 D068          000000            ST      R7,104(,R13)          #  set member slot2
+    0004CA  EB1F D090 0026     000000            STMH    R1,R15,144(,R13)      #
+    0004D0                     000000  L0019:    EQU     *
+    0004D0  50C0 D080          000000            ST      R12,128(,R13)         #
+    0004D4  C030 0000 0152     000000            LARL    R3,$CONSTANT_AREA
+    0004DA  5800 50E8          000000            L       R0,232(,R5)           #
+    0004DE  5000 D0E4          000000            ST      R0,228(,R13)          #
+    0004E2  5880 50E4          000000            L       R8,228(,R5)           #
+    0004E6  5080 D0E0          000000            ST      R8,224(,R13)          #
+    0004EA  5890 8084          000000            L       R9,132(,R8)           #
+    0004EE  5090 D0DC          000000            ST      R9,220(,R13)          #
+    0004F2  E544 9008 0000     000000            MVHHI   8(,R9),X'0000'        #
+    0004F8  E544 9010 0000     000000            MVHHI   16(,R9),X'0000'       #
+    0004FE  E54C 9088 0000     000000            MVHI    136(,R9),X'0000'      #
+    000504  E54C 9090 0000     000000            MVHI    144(,R9),X'0000'      #
+    00050A  D207 9018 32C0     000000            MVC     24(8,R9),704(R3)      #  SORT-CONTROL
+    000510  E54C 9020 0000     000000            MVHI    32(,R9),X'0000'       #
+    000516  E54C 9028 0000     000000            MVHI    40(,R9),X'0000'       #
+    00051C  E54C 9030 0000     000000            MVHI    48(,R9),X'0000'       #
+    000522  D207 9038 32CB     000000            MVC     56(8,R9),715(R3)      #  SORT-MESSAGE
+    000528  E54C 9040 0000     000000            MVHI    64(,R9),X'0000'       #
+    00052E  D200 9048 32D5     000000            MVC     72(1,R9),725(R3)      #  SHIFT-OUT
+    000534  D200 9050 32D6     000000            MVC     80(1,R9),726(R3)      #  SHIFT-IN
+    00053A  E54C 9058 0000     000000            MVHI    88(,R9),X'0000'       #
+    000540  E54C 9080 0000     000000            MVHI    128(,R9),X'0000'      #
+    000546  9240 9060          000000            MVI     96(,R9),X'40'         #
+    00054A  D21C 9061 9060     000000            MVC     97(29,R9),96(R9)      #
+    000550  4100 8004          000000            LA      R0,4(,R8)             #  BLT_1
+    000554  5000 8004          000000            ST      R0,4(,R8)             #
+    000558  4100 8008          000000            LA      R0,8(,R8)             #  BLT_2
+    00055C  5000 8008          000000            ST      R0,8(,R8)             #
+    000560  4100 800C          000000            LA      R0,12(,R8)            #  BLT_3
+    000564  5000 800C          000000            ST      R0,12(,R8)            #
+    000568  EB1F D090 0096     000000            LMH     R1,R15,144(,R13)      #
+    00056E  58D0 D004          000000            L       R13,4(,R13)           #  Caller's DSA
+    000572  58E0 D00C          000000            L       R14,12(,R13)          #  Return Address
+    000576  9809 D014          000000            LM      R0,R9,20(,R13)        #  Restore Caller's registers
+    00057A  07FE               000000            BR      R14                   #  Return
+    00057C  0707               000000            NOPR    R7
+    00057E                     000000            RET
+
+
+
+                    ***   General purpose registers used: 1101101111001111
+                    ***   Floating point  registers used: 0000000000000000
+                    ***   Size of storage acquired: 232
+                    ***   Size of executable code: 278
+
+
+
+    000580                     000000            PROC    #WSVal000000001
+    000580  47F0 F024          000000            BC      R15,36(,R15)          #  Skip over constant area
+    000584  01C3 C5C5          000000            DC      X'01C3C5C5'           #  Eyecatcher: CEEPP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page    16
+
+    000588  0000 00E8          000000            DC      X'000000E8'           #  Stack Size
+    00058C  0000 05D0          000000            DC      X'000005D0'           #  Offset to PPA1
+    000590  47F0 F001          000000            BC      R15,1(,R15)           #  Wrong Entry Point: cause exception
+    000594                     000000  L0018:    EQU     *
+    000594                     000000  L0016:    EQU     *                     #  Handle growing stack
+    000594  58F0 C31C          000000            L       R15,796(,R12)         #  Load CEECAAOGETS
+    000598  184E               000000            LR      R4,R14                #  Required NAB
+    00059A  05EF               000000            BALR    R14,R15               #  Extend Stack
+    00059C  0000 0000          000000            DC      X'00000000'           #  Argument list size = 0
+    0005A0  A7F4 000C          000000            J       L0017                 #  Branch back
+    0005A4  90E9 D00C          000000            STM     R14,R9,12(,R13)       #  Save GPRs Used
+    0005A8  58E0 D04C          000000            L       R14,76(,R13)          #  Load NAB
+    0005AC  4100 E0E8          000000            LA      R0,232(,R14)          #  New NAB Address
+    0005B0  5500 C314          000000            CL      R0,788(,R12)          #  Exceed current storage segment?
+    0005B4  A724 FFF0          000000            JH      L0016                 #  Yes: branch to recovery code
+    0005B8                     000000  L0017:    EQU     *                     #  Stack now has sufficient room
+    0005B8  5000 E04C          000000            ST      R0,76(,R14)           #  Update NAB
+    0005BC  C001 0011 0301     000000            LGFI    R0,X'00110301'        #  load COBOL Language Word
+    0005C2  5000 E000          000000            ST      R0,0(,R14)            #  Save Language Word
+    0005C6  50D0 E004          000000            ST      R13,4(,R14)           #  Save Back Chain
+    0005CA  4100 5120          000000            LA      R0,288(,R5)           #  Address of COBDSACB
+    0005CE  18DE               000000            LR      R13,R14               #  Set new DSA
+    0005D0  5000 D074          000000            ST      R0,116(,R13)          #  Saved in member slot1
+    0005D4  E54C D070 0000     000000            MVHI    112(,R13),X'0000'     #  zero member slot0
+    0005DA  5060 D060          000000            ST      R6,96(,R13)           #  set member slot3
+    0005DE  5070 D068          000000            ST      R7,104(,R13)          #  set member slot2
+    0005E2  EB1F D090 0026     000000            STMH    R1,R15,144(,R13)      #
+    0005E8                     000000  L0019:    EQU     *
+    0005E8  50C0 D080          000000            ST      R12,128(,R13)         #
+    0005EC  C030 0000 00C6     000000            LARL    R3,$CONSTANT_AREA
+    0005F2  5800 50E8          000000            L       R0,232(,R5)           #
+    0005F6  5000 D0E4          000000            ST      R0,228(,R13)          #
+    0005FA  5880 50E4          000000            L       R8,228(,R5)           #
+    0005FE  5080 D0E0          000000            ST      R8,224(,R13)          #
+    000602  5890 8084          000000            L       R9,132(,R8)           #
+    000606  5090 D0DC          000000            ST      R9,220(,R13)          #
+    00060A  D21A 90B8 32D7     000000            MVC     184(27,R9),727(R3)    #  SNUM10-02                +727
+    000610  D203 90D8 32A8     000000            MVC     216(4,R9),680(R3)     #  PARM4
+    000616  E544 90E0 F0F4     000000            MVHHI   224(,R9),X'F0F4'      #
+    00061C  D205 90E8 32F2     000000            MVC     232(6,R9),754(R3)     #  PGMSUB02
+    000622  E544 90EE 4040     000000            MVHHI   238(,R9),X'4040'      #
+    000628  D205 90F0 32F8     000000            MVC     240(6,R9),760(R3)     #  PGMSUB03
+    00062E  E544 90F6 4040     000000            MVHHI   246(,R9),X'4040'      #
+    000634  EB1F D090 0096     000000            LMH     R1,R15,144(,R13)      #
+    00063A  58D0 D004          000000            L       R13,4(,R13)           #  Caller's DSA
+    00063E  58E0 D00C          000000            L       R14,12(,R13)          #  Return Address
+    000642  9809 D014          000000            LM      R0,R9,20(,R13)        #  Restore Caller's registers
+    000646  07FE               000000            BR      R14                   #  Return
+    000648  0707               000000            NOPR    R7
+    00064A                     000000            RET
+
+
+
+                    ***   General purpose registers used: 1101101111001111
+                    ***   Floating point  registers used: 0000000000000000
+                    ***   Size of storage acquired: 232
+                    ***   Size of executable code: 202
+PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page    17
+
+
+
+    000650                     000000            PROC    __COMPUNITsinit
+    000650  47F0 F024          000000            BC      R15,36(,R15)          #  Skip over constant area
+    000654  01C3 C5C5          000000            DC      X'01C3C5C5'           #  Eyecatcher: CEE
+    000658  0000 00F0          000000            DC      X'000000F0'           #  Stack Size
+    00065C  0000 0558          000000            DC      X'00000558'           #  Offset to PPA1
+    000660  47F0 F001          000000            BC      R15,1(,R15)           #  Wrong Entry Point: cause exception
+    000664                     000000  L0018:    EQU     *
+    000664                     000000  L0016:    EQU     *                     #  Handle growing stack
+    000664  58F0 C31C          000000            L       R15,796(,R12)         #  Load CEECAAOGETS
+    000668  184E               000000            LR      R4,R14                #  Required NAB
+    00066A  05EF               000000            BALR    R14,R15               #  Extend Stack
+    00066C  0000 0000          000000            DC      X'00000000'           #  Argument list size = 0
+    000670  A7F4 000C          000000            J       L0017                 #  Branch back
+    000674  90EC D00C          000000            STM     R14,R12,12(,R13)      #  Save GPRs Used
+    000678  58E0 D04C          000000            L       R14,76(,R13)          #  Load NAB
+    00067C  4100 E0F0          000000            LA      R0,240(,R14)          #  New NAB Address
+    000680  5500 C314          000000            CL      R0,788(,R12)          #  Exceed current storage segment?
+    000684  A724 FFF0          000000            JH      L0016                 #  Yes: branch to recovery code
+    000688                     000000  L0017:    EQU     *                     #  Stack now has sufficient room
+    000688  5000 E04C          000000            ST      R0,76(,R14)           #  Update NAB
+    00068C  C001 0011 0301     000000            LGFI    R0,X'00110301'        #  load COBOL Language Word
+    000692  5000 E000          000000            ST      R0,0(,R14)            #  Save Language Word
+    000696  50D0 E004          000000            ST      R13,4(,R14)           #  Save Back Chain
+    00069A  18DE               000000            LR      R13,R14               #  Set new DSA
+    00069C  E54C D074 0000     000000            MVHI    116(,R13),X'0000'     #  Zero COBDSA
+    0006A2  E54C D070 0000     000000            MVHI    112(,R13),X'0000'     #  zero member slot0
+    0006A8  5060 D060          000000            ST      R6,96(,R13)           #  set member slot3
+    0006AC  5070 D068          000000            ST      R7,104(,R13)          #  set member slot2
+    0006B0  EB1F D098 0026     000000            STMH    R1,R15,152(,R13)      #
+    0006B6                     000000  L0019:    EQU     *
+    0006B6  C030 0000 0061     000000            LARL    R3,$CONSTANT_AREA
+    0006BC  5800 C1F4          000000            L       R0,500(,R12)          #
+    0006C0  5000 D0E8          000000            ST      R0,232(,R13)          #
+    0006C4  5820 1000          000000            L       R2,0(,R1)             #
+    0006C8  5840 3010          000000            L       R4,16(,R3)            #
+    0006CC  4184 2000          000000            LA      R8,0(R4,R2)           #
+    0006D0  5080 D0E4          000000            ST      R8,228(,R13)          #
+    0006D4  E54C 8000 0000     000000            MVHI    0(,R8),X'0000'        #
+    0006DA  E54C 805C 0000     000000            MVHI    92(,R8),X'0000'       #
+    0006E0  4100 8010          000000            LA      R0,16(,R8)            #
+    0006E4  5000 8078          000000            ST      R0,120(,R8)           #
+    0006E8  D207 8050 3318     000000            MVC     80(8,R8),792(R3)      #  GPCB_VRM_VERSION
+    0006EE  D203 8010 3328     000000            MVC     16(4,R8),808(R3)      #  GPCB_EYECATCH
+    0006F4  E54C 8014 0001     000000            MVHI    20(,R8),X'0001'       #
+    0006FA  E54C 8058 0028     000000            MVHI    88(,R8),X'0028'       #
+    000700  4100 805C          000000            LA      R0,92(,R8)            #  IPCB_NumEnts
+    000704  5000 8018          000000            ST      R0,24(,R8)            #
+    000708  D20B 801C 3308     000000            MVC     28(12,R8),776(R3)     #
+    00070E  E54C 802C 0000     000000            MVHI    44(,R8),X'0000'       #
+    000714  E54C 8038 0000     000000            MVHI    56(,R8),X'0000'       #
+    00071A  E54C 8030 0000     000000            MVHI    48(,R8),X'0000'       #
+    000720  E548 803C 0000     000000            MVGHI   60(,R8),X'0000'       #
+    000726  D207 8044 3320     000000            MVC     68(8,R8),800(R3)      #  GPCB_OUTDD
+    00072C  E54C 804C 0000     000000            MVHI    76(,R8),X'0000'       #
+    000732  5800 3304          000000            L       R0,772(,R3)           #
+    000736  5000 8064          000000            ST      R0,100(,R8)           #PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page    18
+
+    00073A  E54C 8068 0000     000000            MVHI    104(,R8),X'0000'      #
+    000740  E54C 8070 0000     000000            MVHI    112(,R8),X'0000'      #
+    000746  E54C 8060 0000     000000            MVHI    96(,R8),X'0000'       #
+    00074C  E548 807C 0000     000000            MVGHI   124(,R8),X'0000'      #
+    000752  E54C 806C 0000     000000            MVHI    108(,R8),X'0000'      #
+    000758  D70F 8088 8088     000000            XC      136(16,R8),136(R8)    #
+    00075E  EB1F D098 0096     000000            LMH     R1,R15,152(,R13)      #
+    000764  58D0 D004          000000            L       R13,4(,R13)           #  Caller's DSA
+    000768  58E0 D00C          000000            L       R14,12(,R13)          #  Return Address
+    00076C  980C D014          000000            LM      R0,R12,20(,R13)       #  Restore Caller's registers
+    000770  07FE               000000            BR      R14                   #  Return
+    000772  0707               000000            NOPR    R7
+    000774                     000000            RET
+
+
+
+                    ***   General purpose registers used: 1111101110000111
+                    ***   Floating point  registers used: 0000000000000000
+                    ***   Size of storage acquired: 240
+                    ***   Size of executable code: 292
+
+
+
+
+
+
+                    CONSTANT AREA
+
+ 000778 (+0)      00CCDDFF 00000000 E3D4C1C9 D5F0F100 00000000 00000000 00000000 00000000      |........TMAIN01.................|
+ 000798 (+32)     00000468 00000580 00000000 00000000 00000000 00000000 00000000 E3D4C1C9      |............................TMAI|
+ 0007B8 (+64)     D5F0F100 00000040 00000000 00000002 0000000B 00000007 000007B4 0000000B      |N01.... ........................|
+ 0007D8 (+96)     00000007 000007B4 5C5C5C40 C2C5C7C9 D540E3D4 C1C9D5F0 F140E3C5 E2E30000      |........*** BEGIN TMAIN01 TEST..|
+ 0007F8 (+128)    00000001 01040474 000007E0 0000000B 00000016 00000000 C9E3C5D4 F0F160F0      |...........\............ITEM01-0|
+ 000818 (+160)    F17A0000 00000002 01040474 00000810 0000000B 0000000A 00000000 C9E3C5D4      |1:..........................ITEM|
+ 000838 (+192)    F0F160F0 F27A0000 00000002 01040474 00000834 0000000B 0000000A 00000000      |01-02:..........................|
+ 000858 (+224)    D9D6E4E3 C540C100 00000001 01040474 00000858 0000000B 00000007 00000000      |ROUTE A.........................|
+ 000878 (+256)    D9D6E4E3 C540C200 00000001 01040474 00000878 0000000B 00000007 00000000      |ROUTE B.........................|
+ 000898 (+288)    D9D6E4E3 C540C300 00000001 01040474 00000898 0000000B 00000007 00000000      |ROUTE C............q............|
+ 0008B8 (+320)    D9D6E4E3 C540D6E3 C8C5D900 00000001 01040474 000008B8 0000000B 0000000B      |ROUTE OTHER.....................|
+ 0008D8 (+352)    00000000 C186A385 99408381 93938995 8740D7C7 D4E2E4C2 F0F20000 00000001      |....After calling PGMSUB02......|
+ 0008F8 (+384)    01040474 000008DC 0000000B 00000016 00000000 4040C9E3 C5D4F0F2 60F0F17A      |....................  ITEM02-01:|
+ 000918 (+416)    00000002 01040474 0000090C 0000000B 0000000C 00000000 4040C9E3 C5D4F0F2      |........................  ITEM02|
+ 000938 (+448)    60F0F27A 00000002 01040474 00000930 0000000B 0000000C 00000000 C186A385      |-02:........................Afte|
+ 000958 (+480)    99408381 93938995 8740D7C7 D4E2E4C2 F0F30000 00000001 01040474 00000954      |r calling PGMSUB03..............|
+ 000978 (+512)    0000000B 00000016 00000000 4040C9E3 C5D4F0F3 60F0F17A 00000002 01040474      |............  ITEM03-01:........|
+ 000998 (+544)    00000984 0000000B 0000000C 00000000 4040C9E3 C5D4F0F3 60F0F27A 00000002      |...d............  ITEM03-02:....|
+ 0009B8 (+576)    01040474 000009A8 0000000B 0000000C 00000000 5C5C40C5 D5C440E3 D4C1C9D5      |.......y............** END TMAIN|
+ 0009D8 (+608)    F0F10000 00000001 01040474 000009CC 0000000B 0000000E 00000000 00000025      |01..............................|
+ 0009F8 (+640)    00000000 00000001 0000000B 00000007 000007B4 0000000B 00000005 00000000      |................................|
+ 000A18 (+672)    00000008 00000009 C1C1C1C1 C1C2C2C2 C2C2C3C3 C3C3C300 00000001 00000000      |........AAAAABBBBBCCCCC.........|
+ 000A38 (+704)    C9C7E9E2 D9E3C3C4 40000AE2 E8E2D6E4 E3404000 080E0FF0 F0F0F0F0 F0F0F0F0      |IGZSRTCD ..SYSOUT  ....000000000|
+ 000A58 (+736)    C0C0F0F0 F0F0F0F0 F0F0F000 00000000 000CE3E2 E4C2F0F2 E3E2E4C2 F0F3F0F4      |{{000000000.......TSUB02TSUB0304|
+ 000A78 (+768)    40400000 00000000 000007B4 00000007 04000000 00000000 F2F2F2F7 F6F6F4F0      |  ......................22276640|
+ 000A98 (+800)    E2E8E2D6 E4E34040 C7D7C3C2 00000028                                          |SYSOUT  GPCB....                |
+
+
+
+                    PPA1:  Entry Point ConstantsPP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page    19
+
+ 000AA8  20CEA576                                               =F'550413686'      Flags
+ 000AAC  00000C90                                               =A(PPA2-TMAIN01)
+ 000AB0  00000C00                                               =A(PPA3-TMAIN01)
+ 000AB4  00000000                                               =F'0'              No EPD
+ 000AB8  FFFF0000                                               =F'-65536'         Register Save Mask
+ 000ABC  40000000                                               =F'1073741824'     Member Flags
+ 000AC0  90                                                     =AL1(144)          Flags
+ 000AC1  000198                                                 =AL3(408)          Callee's DSA use/8
+ 000AC4  0002                                                   =AL2(2)            Flags
+ 000AC6  0012                                                   =H'18'             Offset/2 to CDL
+ 000AC8  D0000120                                               =F'-805306080'     State variable location
+ 000ACC  00000000                                               =F'0'              CDL function length/2
+ 000AD0  00000000                                               =F'0'              CDL function EP offset
+ 000AD4  00000000                                               =F'0'              CDL prolog
+ 000AD8  00000000                                               =F'0'              CDL epilog
+ 000ADC  00000000                                               =F'0'              CDL end
+ 000AE0  00000000                                               =F'0'              VRs Area
+ 000AE4  80000000                                               =F'-2147483648'    Extended Flag Field
+ 000AE8  0007  ****                                             AL2(7),C'TMAIN01'
+                    PPA1  End
+
+
+
+
+                    PPA1:  Entry Point Constants
+ 000AF8  20CE2176                                               =F'550379894'      Flags
+ 000AFC  00000828                                               =A(PPA2-#SRVal000000001 )
+ 000B00  000007A8                                               =A(PPA3-#SRVal000000001 )
+ 000B04  00000000                                               =F'0'              No EPD
+ 000B08  FFF10000                                               =F'-983040'        Register Save Mask
+ 000B0C  00000000                                               =F'0'              Member Flags
+ 000B10  90                                                     =AL1(144)          Flags
+ 000B11  0000E8                                                 =AL3(232)          Callee's DSA use/8
+ 000B14  0002                                                   =AL2(2)            Flags
+ 000B16  0012                                                   =H'18'             Offset/2 to CDL
+ 000B18  00000000                                               =F'0'              State variable location
+ 000B1C  00000000                                               =F'0'              CDL function length/2
+ 000B20  00000000                                               =F'0'              CDL function EP offset
+ 000B24  00000000                                               =F'0'              CDL prolog
+ 000B28  00000000                                               =F'0'              CDL epilog
+ 000B2C  00000000                                               =F'0'              CDL end
+ 000B30  00000000                                               =F'0'              VRs Area
+ 000B34  80000000                                               =F'-2147483648'    Extended Flag Field
+ 000B38  0010  ****                                             AL2(16),C'#SRVal000000001 '
+                    PPA1  End
+
+
+
+
+                    PPA1:  Entry Point Constants
+ 000B50  20CE2176                                               =F'550379894'      Flags
+ 000B54  00000710                                               =A(PPA2-#WSVal000000001 )
+ 000B58  000006A0                                               =A(PPA3-#WSVal000000001 )
+ 000B5C  00000000                                               =F'0'              No EPD
+ 000B60  FFF10000                                               =F'-983040'        Register Save Mask
+ 000B64  00000000                                               =F'0'              Member Flags
+ 000B68  90                                                     =AL1(144)          Flags
+ 000B69  0000E8                                                 =AL3(232)          Callee's DSA use/8PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page    20
+
+ 000B6C  0002                                                   =AL2(2)            Flags
+ 000B6E  0012                                                   =H'18'             Offset/2 to CDL
+ 000B70  00000000                                               =F'0'              State variable location
+ 000B74  00000000                                               =F'0'              CDL function length/2
+ 000B78  00000000                                               =F'0'              CDL function EP offset
+ 000B7C  00000000                                               =F'0'              CDL prolog
+ 000B80  00000000                                               =F'0'              CDL epilog
+ 000B84  00000000                                               =F'0'              CDL end
+ 000B88  00000000                                               =F'0'              VRs Area
+ 000B8C  80000000                                               =F'-2147483648'    Extended Flag Field
+ 000B90  0010  ****                                             AL2(16),C'#WSVal000000001 '
+                    PPA1  End
+
+
+
+
+                    PPA1:  Entry Point Constants
+ 000BA8  20CE2176                                               =F'550379894'      Flags
+ 000BAC  00000640                                               =A(PPA2-__COMPUNITsinit)
+ 000BB0  000005E0                                               =A(PPA3-__COMPUNITsinit)
+ 000BB4  00000000                                               =F'0'              No EPD
+ 000BB8  FFFF0000                                               =F'-65536'         Register Save Mask
+ 000BBC  00000000                                               =F'0'              Member Flags
+ 000BC0  90                                                     =AL1(144)          Flags
+ 000BC1  0000F0                                                 =AL3(240)          Callee's DSA use/8
+ 000BC4  0002                                                   =AL2(2)            Flags
+ 000BC6  0012                                                   =H'18'             Offset/2 to CDL
+ 000BC8  00000000                                               =F'0'              State variable location
+ 000BCC  00000000                                               =F'0'              CDL function length/2
+ 000BD0  00000000                                               =F'0'              CDL function EP offset
+ 000BD4  00000000                                               =F'0'              CDL prolog
+ 000BD8  00000000                                               =F'0'              CDL epilog
+ 000BDC  00000000                                               =F'0'              CDL end
+ 000BE0  00000000                                               =F'0'              VRs Area
+ 000BE4  80000000                                               =F'-2147483648'    Extended Flag Field
+ 000BE8  000F  ****                                             AL2(15),C'__COMPUNITsinit'
+                    PPA1  End
+
+
+                    PPA3:  Entry Point Constants
+ 000C00  00000000                                               =F'0'              Flags
+ 000C04  000000C0                                               =F'192'            A(Base_Locator_Table-PPA3)
+ 000C08  000000D8                                               =F'216'            A(Special_Register_Table-PPA3)
+ 000C0C  0000017C                                               =X'17C'            A(User_Entry-CUEntry)
+                    PPA3  End
+
+
+                    PPA3:  Entry Point Constants
+ 000C10  00000000                                               =F'0'              Flags
+ 000C14  00000000                                               =F'0'              A(Base_Locator_Table-PPA3)
+ 000C18  00000000                                               =F'0'              A(Special_Register_Table-PPA3)
+ 000C1C  00000000                                               =X'0'              A(User_Entry-CUEntry)
+                    PPA3  End
+
+
+                    PPA3:  Entry Point Constants
+ 000C20  00000000                                               =F'0'              Flags
+ 000C24  00000000                                               =F'0'              A(Base_Locator_Table-PPA3)PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page    21
+
+ 000C28  00000000                                               =F'0'              A(Special_Register_Table-PPA3)
+ 000C2C  00000000                                               =X'0'              A(User_Entry-CUEntry)
+                    PPA3  End
+
+
+                    PPA3:  Entry Point Constants
+ 000C30  00000000                                               =F'0'              Flags
+ 000C34  00000000                                               =F'0'              A(Base_Locator_Table-PPA3)
+ 000C38  00000000                                               =F'0'              A(Special_Register_Table-PPA3)
+ 000C3C  00000000                                               =X'0'              A(User_Entry-CUEntry)
+                    PPA3  End
+
+                    Timestamp and Version Information
+ 000C40  F2F0  F2F3                                             =C'2023'           Compiled Year
+ 000C44  F0F4  F2F2                                             =C'0422'           Compiled Date MMDD
+ 000C48  F0F8  F4F1  F1F6                                       =C'084116'         Compiled Time HHMMSS
+ 000C4E  F0F6  F0F4  F0F0                                       =C'060400'         VERSION/RELEASE/MOD LEVEL OF PROD
+                    Timestamp and Version Information End
+
+
+                    Compiler Options and Program Information Section
+ 000C54         0038                                            =X'0038'           Size of Compiler Options and Prog Info Section
+ 000C56  (+00)  0474                                            =X'0474'           UNSIGNED BINARY CODE PAGE CCSID VALUE
+ 000C58  (+02)  0A                                              =X'0A'             ARCHITECTURE LEVEL
+ 000C59  (+03)  00                                              =X'00'             OPTIMIZATION LEVEL
+ 000C5A  (+04)  1402                                            =X'1402'           INFO. BYTES 28-29
+ 000C5C  (+06)  0000                                            =X'0000'           INFO. BYTES 30-31
+ 000C5E  (+08)  A0E8744C2000                                    =X'A0E8744C2000'   INFO. BYTES 1-6
+ 000C64  (+14)  001010080008                                    =X'001010080008'   INFO. BYTES 7-12
+ 000C6A  (+20)  000000800C00                                    =X'000000800C00'   INFO. BYTES 13-18
+ 000C70  (+26)  0000004089                                      =X'0000004089'     INFO. BYTES 19-23
+ 000C75  (+31)  00                                              =X'00'             COBOL SIGNATURE LEVEL
+ 000C76  (+32)  00000015                                        =X'00000015'       # DATA DIVISION STATEMENTS
+ 000C7A  (+36)  00000014                                        =X'00000014'       # PROCEDURE DIVISION STATEMENTS
+ 000C7E  (+40)  00008000                                        =X'00008000'       INFO. BYTES 24-27
+ 000C82  (+44)  D7F2F2F1F0F0F340                                =C'P221003 '       BUILD LEVEL INFO
+ 000C8A  (+52)  1000000A                                        =X'1000000A'       INFO. BYTES 32-35
+                    Compiler Options and Program Information Section End
+
+
+
+                    PPA2:  Entry Point Constants
+ 000C90  04002203                                               =F'67117571'       Flags
+ 000C94  FFFFF370                                               =A(CEESTART-PPA2)
+ 000C98  00000058                                               =F'88'             A(PPA4-PPA2)
+ 000C9C  FFFFFFB0                                               =A(TIMESTMP-PPA2)
+ 000CA0  FFFFF370                                               =A(PrimaryEntryPoint-PPA2)
+ 000CA4  02000000                                               =F'33554432'       Flags
+                    PPA2  End
+
+
+                    PARMCEE:  LE Initialization Constants
+ 000CA8  00000006                                               =F'6'              Number Of Entries In Parm List
+ 000CAC  00000024                                               =X'24'             A(Primary Entry Point Info Block)
+ 000CB0  00000000                                               =X'0'              V(CEESTART)
+ 000CB4  00000000                                               =X'0'              V(CEEBETBL)
+ 000CB8  00000004                                               =X'4'              CEL Member Identifier
+ 000CBC  00000000                                               =X'0'              For CEL Member UsePP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page    22
+
+                    PARMCEE  End
+
+
+                    Base Locator Table
+ 000CC0  01                                                     =X'1'              Table Version
+ 000CC1  00                                                     =X'0'              Reserved
+ 000CC2  0008                                                   =H'8'              Header length
+ 000CC4  00000010                                               =F'16'             Array byte length
+ 000CC8  1200                                                   =X'1200'           Flags & info (element  1)
+ 000CCA  00000000                                               =X'0'              Offset to cells
+ 000CCE  01                                                     =X'01'             Cell count
+ 000CCF  2A00                                                   =X'2A00'           Flags & info (element  2)
+ 000CD1  00000004                                               =X'4'              Offset to cells
+ 000CD5  03                                                     =X'03'             Cell count
+ 000CD6  0000                                                   =X'0'              Flags & info (end of array)
+                    Base Locator Table End
+
+
+                    Special Register Table
+ 000CD8  01                                                     =X'1'              Table Version
+ 000CD9  00                                                     =X'0'              Reserved
+ 000CDA  0008                                                   =H'8'              Header length
+ 000CDC  00000006                                               =F'6'              Array byte length
+ 000CE0  13                                                     =X'13'             Flags & info (element  1)
+ 000CE1  00000008                                               =X'8'              Offset to cells
+ 000CE5  00                                                     =X'0'              Flags & info (end of array)
+                    Special Register Table End
+
+
+                    PPA4:  Entry Point Constants
+ 000CE8  0A000000                                               =F'167772160'      Flags 1
+ 000CEC  00020100                                               =F'131328'         Flags 2
+ 000CF0  00000000                                               =F'0'              A(NORENTstatic)
+ 000CF4  00000000                                               =F'0'              Q(RENTstatic)
+ 000CF8  00000084                                               =F'132'            A(DATA31_address_cell-RENTstatic)
+ 000CFC  FFFFF318                                               =F'-3304'          A(Code-PPA4)
+ 000D00  00000D38                                               =F'3384'           Code Length
+ 000D04  00000000                                               =F'0'              Length NORENTstatic
+ 000D08  00000098                                               =F'152'            Length RENTstatic
+ 000D0C  000000F8                                               =F'248'            Length DATA31
+ 000D10  003F                                                   =X'3F'             A(CUName-PPA4)
+ 000D12  0001                                                   =X'1'              PPA4 Minor Ver
+ 000D14  0000                                                   =X'0'              A(PPA4ABO-PPA4)
+ 000D16  000000000000                                           =X'0'              Reserved
+ 000D1C  00000098                                               =X'98'             Offset UsrWrkStrg
+ 000D20  00000060                                               =X'60'             Length UsrWrkStrg
+ 000D24  00                                                     =X'0'              Has Externals
+ 000D25  0000                                                   =X'0'              A(SYSDEBUGName-PPA4)
+                    PPA4  End
+
+
+
+
+
+                    E X T E R N A L    S Y M B O L    D I C T I O N A R Y
+
+                     TYPE   ID   ADDR   LENGTH        NAME
+PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page    23
+
+                      SD     1  000000  000000        TMAIN01
+                      ED     2  000000  000000        C_CEESG003
+                      ED     3  000000  000D38        C_CODE
+                      LD     4  000000  000000        TMAIN01#C
+                      ER     5  000000  000000        CEESTART
+                      ER     6  000000  000000        CEEBETBL
+                      ED     7  000000  000000        C_WSA
+                      PR     8  000000  000098        TMAIN01#S
+                      ED     9  000000  002404        D_MCODE
+                      ED    10  000000  000022        B_IDRL
+                      ER    11  000000  000000        IGZXBST4
+                      ER    12  000000  000000        TMAIN01
+                      ER    13  000000  000000        IGZXFCAL
+                      ER    14  000000  000000        IGZXPRS
+                      ER    15  000000  000000        IGZXCMSG
+                      ER    16  000000  000000        IGZXDSP
+                      ER    17  000000  000000        IGZXVMO
+                      ER    18  000000  000000        IGZXRTN
+                      ER    19  000000  000000        IGZXTREN
+                      ER    20  000000  000000        IGZXRT1
+                      LD    21  000000  000000        TMAIN01
+                      ER    22  000000  000000        CEESG004
+                      ER    23  000000  000000        IGZXBS61
+                      ED    24  000000  000000        C_@@PPA2
+                      PR    25  000000  000008
+                      ED    26  000000  000000        C_@@CSINIT
+                      PR    27  000000  000004
+
+
+                    * * * * *   I N I T I A L   H E A P     S T O R A G E     M A P   * * * * *
+
+ OFFSET (HEX)   LENGTH (HEX)   NAME
+
+           0              4       BLL_Ptrs
+           4              C       BLT_Ptrs
+          10             74       GPCB
+          84              4       WS-BASE-ADDRESS
+          88              8       TS2=7
+          90              8       TS2=8
+
+
+                    * * * * *   E N D     O F     I N I T I A L   H E A P     S T O R A G E     M A P   * * * * *
+
+                    * * * * *   B E L O W    T H E    B A R    H E A P    M A P   * * * * *
+
+ OFFSET (HEX)   LENGTH (HEX)   NAME
+
+           0              4       JNIENVPTR
+           8              2       RETURN-CODE
+          10              2       SORT-RETURN
+          18              8       SORT-CONTROL
+          20              4       SORT-CORE-SIZE
+          28              4       SORT-FILE-SIZE
+          30              4       SORT-MODE-SIZE
+          38              8       SORT-MESSAGE
+          40              4       TALLY
+          48              1       SHIFT-OUT
+          50              1       SHIFT-INPP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page    24
+
+          58              4       XML-CODE
+          60             1E       XML-EVENT
+          80              4       XML-INFORMATION
+          88              4       JSON-CODE
+          90              4       JSON-STATUS
+          98              A       PARM02
+          A8              A       PARM03
+          B8             1B       PARM2
+          D8              4       PARM4
+          E0              4       PARM5
+          E8              8       PGMSUB02
+          F0              8       PGMSUB03
+
+
+                    * * * * *   E N D     O F     B E L O W    T H E    B A R    H E A P    M A P   * * * * *
+
+                    * * * * *   S T A C K     S T O R A G E    M A P   * * * * *
+
+ OFFSET (HEX)   LENGTH (HEX)   NAME
+
+ Block name: TMAIN01
+
+           C              4       TS2=4
+          80              4       _@MYARGS
+          84              4       _$CAA
+          E0              4       _CACHED_$WORKING-STORAGE-31
+          E4              4       _CACHED_$STATIC
+          E8              4       _CACHED_CRENT
+          EC              4       TS2=10
+          F0              4       TS2=9
+          F4              2       _returnValue
+          F8             28       _ArgumentList
+         120             60       COBDSACB
+         180             18       VLC_cells
+
+
+ OFFSET (HEX)   LENGTH (HEX)   NAME
+
+ Block name: #SRVal000000001
+
+          80              4       _$CAA
+          84              4       _@ParentDSA
+          DC              4       _CACHED_$WORKING-STORAGE-31
+          E0              4       _CACHED_$STATIC
+          E4              4       _CACHED_CRENT
+
+
+ OFFSET (HEX)   LENGTH (HEX)   NAME
+
+ Block name: #WSVal000000001
+
+          80              4       _$CAA
+          84              4       _@ParentDSA
+          DC              4       _CACHED_$WORKING-STORAGE-31
+          E0              4       _CACHED_$STATIC
+          E4              4       _CACHED_CRENT
+
+PP 5655-EC6 IBM Enterprise COBOL for z/OS  6.4.0 P221003       TMAIN01   Date 04/22/2023  Time 08:41:16   Page    25
+
+ OFFSET (HEX)   LENGTH (HEX)   NAME
+
+ Block name: __COMPUNITsinit
+
+           C              4       __CAACRENT
+          80              4       _@MYARGS
+          84              4       _$CAA
+          E4              4       _CACHED_$STATIC
+          E8              4       _CACHED_CRENT
+
+
+                    * * * * *   E N D     O F     S T A C K     S T O R A G E    M A P   * * * * *
+
+
+
+           Compiler back end level: tr_v64_cobol_20220929_1716_7rh_s0A7Ee27WMIAuc_36w
+
+
+
+           * * * * *   E N D   O F   C O M P I L A T I O N   * * * * *
+
+
+
+Messages    Total    Informational    Warning    Error    Severe    Terminating
+
+Printed:       1           1
+
+
+* Statistics for COBOL program TMAIN01:
+*    Source records = 89
+*    Data Division statements = 21
+*    Procedure Division statements = 20
+*    Generated COBOL statements = 0
+*    Program complexity factor = 20
+
+End of compilation 1,  program TMAIN01,  highest severity 0.
+
+Return code 0

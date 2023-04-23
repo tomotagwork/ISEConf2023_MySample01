@@ -1,0 +1,7 @@
+@HLQ@=IDZUSR1.TEST01
+@VOL@=USRVS1
+@CompLibrary@=IGY.V6R4M0.SIGYCOMP
+@LinkLibrary@=CEE.SCEELKED
+@SourceCodepage@=IBM-1047
+@ProgName@=TMAIN01
+ 
